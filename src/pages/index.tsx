@@ -42,7 +42,9 @@ export default function Home() {
                     <span className="text-teal-600 text-sm font-medium text-center lg:text-left">🚀 Up to 3x faster than HTTP</span>
                     <h1 className="text-4xl font-semibold w-full my-2 text-center lg:text-left">Blazing fast and opinionated full-stack React + Vite framework</h1>
                     <p className="text-lg text-gray-500 text-center lg:text-left">Designed for simplicity and type safety, it provides seamless RPC + pages routing.</p>
-                    <button className="button primary mt-6"> Get Started</button>
+                    <Link href="/docs" className="button primary mt-6">
+                        Get Started
+                    </Link>
                 </div>
                 <div className="bg-gray-200 p-3 rounded-lg flex flex-col lg:col-span-4">
                     <div className="flex gap-2">
