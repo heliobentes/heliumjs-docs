@@ -16,7 +16,9 @@ export default function Middleware() {
 export default middleware(async (ctx, next) => {
     console.log("Request received");
     // Add your database connection or auth logic here
-    return next();
+    await next();
+    //You can even add code after the request is handled
+    console.log("Request ended");
 });`}
                 language="typescript"
             />

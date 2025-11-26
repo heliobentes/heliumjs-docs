@@ -37,8 +37,10 @@ export const authHandler = defineHTTPRequest("ALL", "/auth/:provider", async (re
 });`}
                 language="typescript"
             />
-            <p className="text-sm text-gray-500">
-                *<code>toWebRequest()</code> converts Helium's <code>Request</code> to a standard web <code>Request</code> object.
+            <h2 className="text-2xl font-semibold text-gray-900 mt-8">toWebRequest()</h2>
+            <p className="">
+                <code>toWebRequest()</code> converts Helium's <code>Request</code> to a standard web <code>Request</code> object. Useful for integrating with libraries expecting
+                standard web requests.
             </p>
         </div>
     );
