@@ -5,7 +5,6 @@ const config: HeliumConfig = {
     rpc: {
         transport: "auto",
         autoHttpOnMobile: true,
-        encoding: "msgpack",
         compression: {
             enabled: true,
             threshold: 1024,

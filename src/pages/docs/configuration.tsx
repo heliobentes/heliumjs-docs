@@ -22,9 +22,6 @@ const config: HeliumConfig = {
         // Auto-switch to HTTP on mobile/cellular networks
         // Mobile carriers prioritize HTTP traffic over WebSocket
         autoHttpOnMobile: false, // default
-        
-        // Message encoding: "msgpack" | "json" (default: "msgpack")
-        encoding: "msgpack",  // or "json"
 
         // Compression settings
         compression: {
