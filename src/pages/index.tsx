@@ -39,7 +39,7 @@ export default function Home() {
         <main className="space-y-6 p-4">
             <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 lg:gap-16 lg:py-8">
                 <div className="flex flex-col justify-center items-center lg:items-start py-10 lg:col-span-3">
-                    <span className="text-teal-600 text-sm font-medium text-center lg:text-left">🚀 Up to 3x faster than HTTP</span>
+                    <span className="text-teal-600 text-sm font-medium text-center lg:text-left">🚀 Up to 2x faster than HTTP</span>
                     <h1 className="text-4xl font-semibold w-full my-2 text-center lg:text-left">Blazing fast and opinionated full-stack React + Vite framework</h1>
                     <p className="text-lg text-gray-500 text-center lg:text-left">Designed for simplicity and type safety, it provides seamless RPC + pages routing.</p>
                     <Link href="/docs" className="button primary mt-6">
@@ -74,7 +74,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="pt-10 border-t border-gray-200">
-                <h2 className="text-3xl font-semibold text-center my-6">🚀 Up to 3x faster than HTTP</h2>
+                <h2 className="text-3xl font-semibold text-center my-6">🚀 Up to 2x faster than HTTP</h2>
                 <p className="text-lg text-gray-500 text-center mt-2 max-w-3xl mx-auto">
                     HeliumJS replaces traditional HTTP requests with a high-performance binary protocol over WebSockets. By eliminating handshake overhead and minimizing payload
                     size, it delivers significantly lower latency and superior throughput.
@@ -94,32 +94,26 @@ export default function Home() {
                             <tbody className="divide-y divide-gray-200">
                                 <tr>
                                     <td className="py-4 px-6 text-sm font-medium text-gray-900">Fast Internet</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">106</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">169</td>
-                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">1.6x</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-6 text-sm font-medium text-gray-900">Fast 4G</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">135</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">185</td>
-                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">1.4x</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">150</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">170</td>
+                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">1.1x</td>
                                 </tr>
                                 <tr>
                                     <td className="py-4 px-6 text-sm font-medium text-gray-900">Slow 4G</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">262</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">586</td>
-                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">2.2x</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">390</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">600</td>
+                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">1.5x</td>
                                 </tr>
                                 <tr>
                                     <td className="py-4 px-6 text-sm font-medium text-gray-900">3G</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">661</td>
-                                    <td className="py-4 px-6 text-sm text-gray-500">2063</td>
-                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">3x</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">970</td>
+                                    <td className="py-4 px-6 text-sm text-gray-500">2120</td>
+                                    <td className="py-4 px-6 text-sm text-green-600 font-semibold">2.2x</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p className="text-gray-400 text-xs text-center mt-2">Test made by listing 800 tasks from the database 100x</p>
+                    <p className="text-gray-400 text-xs text-center mt-2">Test made by listing 1000 tasks from the database 50x</p>
                     <div className="mt-8 text-center">
                         <Link href="/speed-test" className="button primary">
                             Test it yourself
