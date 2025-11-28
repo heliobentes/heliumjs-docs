@@ -1,6 +1,7 @@
 import { IconBrandGithubFilled } from "@tabler/icons-react";
 import type { LayoutProps } from "helium/client";
-import { Link, PageTransition, useRouter } from "helium/client";
+import { Link, useRouter } from "helium/client";
+import { PageTransition } from "helium/client/transitions";
 
 import ErrorBoundary from "../components/ErrorBoundary";
 import HeliumLogo from "../components/Logo";

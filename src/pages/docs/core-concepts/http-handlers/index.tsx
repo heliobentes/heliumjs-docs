@@ -1,13 +1,15 @@
 "use ssg";
-import CodeBlock from "../../../components/CodeBlock";
+import { Link } from "helium/client";
 
-export default function HttpHandlers() {
+import CodeBlock from "../../../../components/CodeBlock";
+
+export default function HttpHandlersOverview() {
     return (
         <div className="space-y-6">
             <h1 className="text-3xl font-bold text-gray-900">HTTP Handlers</h1>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Overview</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
                 <p>
                     HeliumJS provides <code>defineHTTPRequest</code> for creating custom HTTP endpoints. This is useful for:
                 </p>
@@ -18,10 +20,22 @@ export default function HttpHandlers() {
                     <li>File uploads/downloads</li>
                     <li>Server-sent events</li>
                 </ul>
-            </div>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Basic Usage</h2>
+                <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                    <p className="font-semibold text-teal-800 mb-2">In this section:</p>
+                    <ul className="list-disc list-inside space-y-1 text-teal-700">
+                        <li>
+                            <Link href="/docs/core-concepts/http-handlers/examples" className="underline hover:text-teal-900">
+                                Examples
+                            </Link>{" "}
+                            - Stripe webhooks, OpenAI streaming, auth handlers
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Basic Usage</h2>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "helium/server";
 
@@ -33,10 +47,10 @@ export const myEndpoint = defineHTTPRequest("GET", "/api/hello", async (req, ctx
                 <p className="text-sm text-gray-600">
                     Supported methods: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>, <code>ALL</code>
                 </p>
-            </div>
+            </section>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Dynamic Routes</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Dynamic Routes</h2>
                 <p>
                     Use <code>:param</code> syntax for dynamic path segments:
                 </p>
@@ -54,10 +68,10 @@ export const getProduct = defineHTTPRequest("GET", "/api/products/:category/:id"
 });`}
                     language="typescript"
                 />
-            </div>
+            </section>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Catch-All Routes</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Catch-All Routes</h2>
                 <p>
                     Use <code>*</code> to match any remaining path segments (useful for auth providers):
                 </p>
@@ -72,10 +86,10 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
 });`}
                     language="typescript"
                 />
-            </div>
+            </section>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Request Object</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Request Object</h2>
                 <CodeBlock
                     code={`export const myHandler = defineHTTPRequest("POST", "/api/data", async (req, ctx) => {
     // HTTP method
@@ -103,10 +117,38 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
 });`}
                     language="typescript"
                 />
-            </div>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Response Headers & Status Codes</h2>
+                <h3 className="text-xl font-semibold text-gray-900">Request Properties</h3>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>
+                        <code>req.method</code> - HTTP method (GET, POST, etc.)
+                    </li>
+                    <li>
+                        <code>req.headers</code> - Request headers object
+                    </li>
+                    <li>
+                        <code>req.query</code> - Query string parameters
+                    </li>
+                    <li>
+                        <code>req.params</code> - Route parameters
+                    </li>
+                    <li>
+                        <code>req.cookies</code> - Parsed cookies
+                    </li>
+                    <li>
+                        <code>req.json()</code> - Parse JSON body
+                    </li>
+                    <li>
+                        <code>req.text()</code> - Get raw body as text
+                    </li>
+                    <li>
+                        <code>req.toWebRequest()</code> - Convert to Web API Request
+                    </li>
+                </ul>
+            </section>
+
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Response Headers & Status Codes</h2>
                 <p>
                     Return a standard Web API <code>Response</code> object for full control:
                 </p>
@@ -139,14 +181,35 @@ export const errorExample = defineHTTPRequest("POST", "/api/resource", async (re
 });`}
                     language="typescript"
                 />
-                <p className="text-sm text-gray-600">
-                    Common status codes: <code>200</code> (OK), <code>201</code> (Created), <code>400</code> (Bad Request),
-                    <code>401</code> (Unauthorized), <code>404</code> (Not Found), <code>500</code> (Server Error)
-                </p>
-            </div>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Streaming Responses</h2>
+                <h3 className="text-xl font-semibold text-gray-900">Common Status Codes</h3>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>
+                        <code>200</code> - OK
+                    </li>
+                    <li>
+                        <code>201</code> - Created
+                    </li>
+                    <li>
+                        <code>400</code> - Bad Request
+                    </li>
+                    <li>
+                        <code>401</code> - Unauthorized
+                    </li>
+                    <li>
+                        <code>403</code> - Forbidden
+                    </li>
+                    <li>
+                        <code>404</code> - Not Found
+                    </li>
+                    <li>
+                        <code>500</code> - Internal Server Error
+                    </li>
+                </ul>
+            </section>
+
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Streaming Responses</h2>
                 <CodeBlock
                     code={`export const streamData = defineHTTPRequest("GET", "/api/stream", async (req, ctx) => {
     const stream = new ReadableStream({
@@ -170,122 +233,10 @@ export const errorExample = defineHTTPRequest("POST", "/api/resource", async (re
 });`}
                     language="typescript"
                 />
-            </div>
+            </section>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Webhook Example (Stripe)</h2>
-                <CodeBlock
-                    code={`import { defineHTTPRequest } from "helium/server";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-export const stripeWebhook = defineHTTPRequest("POST", "/webhooks/stripe", async (req, ctx) => {
-    const body = await req.text();
-    const signature = req.headers["stripe-signature"] as string;
-    
-    try {
-        const event = stripe.webhooks.constructEvent(
-            body,
-            signature,
-            process.env.STRIPE_WEBHOOK_SECRET!
-        );
-        
-        // Handle event
-        switch (event.type) {
-            case "payment_intent.succeeded":
-                // Handle payment
-                break;
-            case "customer.subscription.deleted":
-                // Handle cancellation
-                break;
-        }
-        
-        return { received: true };
-    } catch (err) {
-        return new Response(JSON.stringify({ error: "Invalid signature" }), {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-        });
-    }
-});`}
-                    language="typescript"
-                />
-            </div>
-
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">OpenAI Streaming Example</h2>
-                <CodeBlock
-                    code={`import { defineHTTPRequest } from "helium/server";
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-export const chatCompletionStream = defineHTTPRequest("POST", "/api/chat/stream", async (req, ctx) => {
-    const { message } = (await req.json()) as { message: string };
-    
-    if (!message) {
-        return new Response(JSON.stringify({ error: "Message is required" }), {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-        });
-    }
-    
-    try {
-        const stream = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [{ role: "user", content: message }],
-            stream: true,
-        });
-        
-        // Create a ReadableStream from the OpenAI stream
-        const readableStream = new ReadableStream({
-            async start(controller) {
-                try {
-                    for await (const chunk of stream) {
-                        const content = chunk.choices[0]?.delta?.content || "";
-                        if (content) {
-                            // Send as SSE format
-                            const data = \`data: \${JSON.stringify({ content })}\\n\\n\`;
-                            controller.enqueue(new TextEncoder().encode(data));
-                        }
-                    }
-                    controller.enqueue(new TextEncoder().encode("data: [DONE]\\n\\n"));
-                    controller.close();
-                } catch (error) {
-                    controller.error(error);
-                }
-            },
-        });
-        
-        return new Response(readableStream, {
-            status: 200,
-            headers: {
-                "Content-Type": "text/event-stream",
-                "Cache-Control": "no-cache",
-                Connection: "keep-alive",
-            },
-        });
-    } catch (error) {
-        console.error("OpenAI API error:", error);
-        
-        return new Response(
-            JSON.stringify({ error: "Failed to get completion" }),
-            {
-                status: 500,
-                headers: { "Content-Type": "application/json" },
-            }
-        );
-    }
-});`}
-                    language="typescript"
-                />
-            </div>
-
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Converting to Web Request</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Converting to Web Request</h2>
                 <p>
                     Use <code>toWebRequest()</code> to convert Helium's request to a standard Web API <code>Request</code> for third-party libraries:
                 </p>
@@ -302,10 +253,10 @@ export const authHandler = defineHTTPRequest("ALL", "/auth/*", async (req, ctx) 
 });`}
                     language="typescript"
                 />
-            </div>
+            </section>
 
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Best Practices</h2>
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Best Practices</h2>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         Use <code>Response</code> objects when you need custom headers or status codes
@@ -316,7 +267,7 @@ export const authHandler = defineHTTPRequest("ALL", "/auth/*", async (req, ctx) 
                     <li>Add cache headers for cacheable responses</li>
                     <li>Handle errors gracefully with try-catch blocks</li>
                 </ul>
-            </div>
+            </section>
         </div>
     );
 }

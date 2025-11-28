@@ -1,14 +1,20 @@
 import {
     IconAppWindow,
+    IconArrowsShuffle,
     IconBolt,
+    IconChevronDown,
+    IconChevronRight,
     IconCloud,
     IconCloudDollar,
     IconCode,
+    IconCursorText,
     IconDatabase,
     IconDeviceDesktopCode,
     IconExternalLink,
     IconFileCode,
     IconFolder,
+    IconKeyframeAlignCenter,
+    IconLink,
     IconMenu2,
     IconRoute,
     IconServer,
@@ -25,7 +31,22 @@ import { useEffect, useState } from "react";
 
 import { cn } from "../../utils";
 
-const menuItems = [
+interface MenuItem {
+    title: React.ReactNode;
+    icon: React.ComponentType<{ size: number }>;
+    href: string;
+    target?: string;
+    subItems?: MenuItem[];
+}
+
+interface MenuSection {
+    title: string;
+    items?: MenuItem[];
+    icon?: React.ComponentType<{ size: number }>;
+    href?: string;
+}
+
+const menuItems: MenuSection[] = [
     {
         title: "Getting Started",
         items: [
@@ -60,9 +81,29 @@ const menuItems = [
         title: "Core Concepts",
         items: [
             { title: "RPC", icon: IconServer, href: "/docs/core-concepts/rpc" },
-            { title: "Routing", icon: IconRoute, href: "/docs/core-concepts/routing" },
-            { title: "HTTP Handlers", icon: IconWorld, href: "/docs/core-concepts/http-handlers" },
-            { title: "Middleware", icon: IconCode, href: "/docs/core-concepts/middleware" },
+            {
+                title: "Routing",
+                icon: IconRoute,
+                href: "/docs/core-concepts/routing",
+                subItems: [
+                    { title: "Overview", icon: IconRoute, href: "/docs/core-concepts/routing" },
+                    { title: "Navigation", icon: IconLink, href: "/docs/core-concepts/routing/navigation" },
+                    { title: "useRouter Hook", icon: IconCursorText, href: "/docs/core-concepts/routing/use-router" },
+                    { title: "Layouts", icon: IconAppWindow, href: "/docs/core-concepts/routing/layouts" },
+                    { title: "Page Transitions", icon: IconArrowsShuffle, href: "/docs/core-concepts/routing/transitions" },
+                    { title: "Examples", icon: IconCode, href: "/docs/core-concepts/routing/examples" },
+                ],
+            },
+            {
+                title: "HTTP Handlers",
+                icon: IconWorld,
+                href: "/docs/core-concepts/http-handlers",
+                subItems: [
+                    { title: "Overview", icon: IconWorld, href: "/docs/core-concepts/http-handlers" },
+                    { title: "Examples", icon: IconCode, href: "/docs/core-concepts/http-handlers/examples" },
+                ],
+            },
+            { title: "Middleware", icon: IconKeyframeAlignCenter, href: "/docs/core-concepts/middleware" },
             { title: "Configuration", icon: IconSettings, href: "/docs/core-concepts/configuration" },
             { title: "SSG", icon: IconFileCode, href: "/docs/core-concepts/ssg" },
         ],
@@ -93,10 +134,96 @@ const menuItems = [
 export default function DocsLayout({ children }: LayoutProps) {
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
+        // Auto-expand menus if on a subpage
+        const expanded = new Set<string>();
+        if (router.path.startsWith("/docs/core-concepts/routing")) {
+            expanded.add("/docs/core-concepts/routing");
+        }
+        if (router.path.startsWith("/docs/core-concepts/http-handlers")) {
+            expanded.add("/docs/core-concepts/http-handlers");
+        }
+        return expanded;
+    });
 
     useEffect(() => {
         setIsMobileMenuOpen(false);
+        // Auto-expand parent when navigating to a subpage
+        if (router.path.startsWith("/docs/core-concepts/routing")) {
+            setExpandedItems((prev) => new Set([...prev, "/docs/core-concepts/routing"]));
+        }
+        if (router.path.startsWith("/docs/core-concepts/http-handlers")) {
+            setExpandedItems((prev) => new Set([...prev, "/docs/core-concepts/http-handlers"]));
+        }
     }, [router.path]);
+
+    const toggleExpanded = (href: string) => {
+        setExpandedItems((prev) => {
+            const next = new Set(prev);
+            if (next.has(href)) {
+                next.delete(href);
+            } else {
+                next.add(href);
+            }
+            return next;
+        });
+    };
+
+    const isActive = (href: string) => router.path === href;
+    const isActiveParent = (href: string) => router.path.startsWith(href + "/") || router.path === href;
+
+    const renderMenuItem = (item: MenuItem) => {
+        const hasSubItems = item.subItems && item.subItems.length > 0;
+        const isExpanded = expandedItems.has(item.href);
+
+        return (
+            <div key={item.href}>
+                <div className="flex items-center gap-1">
+                    <Link
+                        href={item.href}
+                        target={item.target}
+                        className={cn(
+                            "flex-1 flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                            !hasSubItems && isActive(item.href)
+                                ? "bg-teal-50 text-teal-700"
+                                : isActiveParent(item.href) && hasSubItems
+                                  ? "text-teal-600"
+                                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        )}
+                    >
+                        <item.icon size={18} />
+                        {item.title}
+                    </Link>
+                    {hasSubItems && (
+                        <button
+                            onClick={() => toggleExpanded(item.href)}
+                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-teal-50 rounded-md cursor-pointer"
+                            aria-label={isExpanded ? "Collapse submenu" : "Expand submenu"}
+                        >
+                            {isExpanded ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}
+                        </button>
+                    )}
+                </div>
+                {hasSubItems && isExpanded && (
+                    <div className="ml-6 mt-1 space-y-1 border-l border-gray-200 pl-2">
+                        {item.subItems!.map((subItem) => (
+                            <Link
+                                key={subItem.href}
+                                href={subItem.href}
+                                className={cn(
+                                    "flex items-center gap-3 px-3 py-1.5 rounded-md text-sm transition-colors",
+                                    isActive(subItem.href) ? "bg-teal-50 text-teal-700 font-medium" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                                )}
+                            >
+                                <subItem.icon size={16} />
+                                {subItem.title}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     return (
         <div className="flex flex-col lg:flex-row gap-8 py-8 px-4">
@@ -117,32 +244,17 @@ export default function DocsLayout({ children }: LayoutProps) {
                             {section.items ? (
                                 <>
                                     <h3 className="font-semibold text-gray-900 mb-3 px-3">{section.title}</h3>
-                                    <div className="space-y-1">
-                                        {section.items.map((item) => (
-                                            <Link
-                                                key={item.href}
-                                                href={item.href}
-                                                target={item.target}
-                                                className={cn(
-                                                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                                                    router.path === item.href ? "bg-teal-50 text-teal-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                                                )}
-                                            >
-                                                <item.icon size={18} />
-                                                {item.title}
-                                            </Link>
-                                        ))}
-                                    </div>
+                                    <div className="space-y-1">{section.items.map((item) => renderMenuItem(item))}</div>
                                 </>
                             ) : (
                                 <Link
-                                    href={section.href}
+                                    href={section.href!}
                                     className={cn(
                                         "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
                                         router.path === section.href ? "bg-teal-50 text-teal-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                     )}
                                 >
-                                    <section.icon size={18} />
+                                    {section.icon && <section.icon size={18} />}
                                     {section.title}
                                 </Link>
                             )}
