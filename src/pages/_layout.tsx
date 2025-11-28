@@ -1,8 +1,10 @@
 import { IconBrandGithubFilled } from "@tabler/icons-react";
 import type { LayoutProps } from "helium/client";
-import { Link, useRouter } from "helium/client";
+import { Link, PageTransition, useRouter } from "helium/client";
 
+import ErrorBoundary from "../components/ErrorBoundary";
 import HeliumLogo from "../components/Logo";
+import PageLoader from "../components/PageLoader";
 import { cn } from "../utils";
 
 export default function RootLayout({ children }: LayoutProps) {
@@ -16,6 +18,7 @@ export default function RootLayout({ children }: LayoutProps) {
                         <HeliumLogo />
                         HeliumJS
                     </div>
+
                     <nav className="lg:ml-auto flex items-center h-16">
                         <Link
                             href="/"
@@ -47,7 +50,13 @@ export default function RootLayout({ children }: LayoutProps) {
                     </nav>
                 </div>
             </header>
-            <main className="container mx-auto flex-1">{children}</main>
+            <main className="container mx-auto flex-1">
+                <ErrorBoundary>
+                    <PageTransition loadingClassName="animate-pulse" fallback={<PageLoader />}>
+                        {children}
+                    </PageTransition>
+                </ErrorBoundary>
+            </main>
             <footer className="bg-white border-t border-gray-300 mt-10">
                 <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
                     <div className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} HeliumJS. Released under the MIT License.</div>

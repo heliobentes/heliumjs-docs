@@ -242,6 +242,9 @@ export default function Nav() {
                         <code>replace</code> (boolean): Use <code>history.replace</code> instead of <code>history.push</code>
                     </li>
                     <li>
+                        <code>prefetch</code> (boolean, default: <code>true</code>): Prefetch page on hover for faster navigation
+                    </li>
+                    <li>
                         Standard <code>&lt;a&gt;</code> tag props (className, onClick, etc.)
                     </li>
                 </ul>
@@ -251,7 +254,21 @@ export default function Nav() {
                     <li>Left-clicks are intercepted for SPA navigation</li>
                     <li>Modifier keys (Ctrl, Cmd, Shift, Alt) preserve normal link behavior (open in new tab, etc.)</li>
                     <li>Right-clicks and middle-clicks work normally</li>
+                    <li>
+                        <strong>Automatic prefetching:</strong> When users hover over or focus on a link, the page chunk is preloaded in the background for instant navigation
+                    </li>
                 </ul>
+
+                <p className="font-semibold">Prefetching:</p>
+                <p>Links automatically prefetch page chunks on hover and focus (keyboard navigation). This means when a user clicks a link, the page is often already loaded:</p>
+                <CodeBlock
+                    code={`// Prefetching enabled by default
+<Link href="/heavy-page">Heavy Page</Link>
+
+// Disable prefetching for specific links
+<Link href="/settings" prefetch={false}>Settings</Link>`}
+                    language="tsx"
+                />
 
                 <h3 className="text-xl font-semibold text-gray-900">Programmatic Navigation</h3>
                 <p>
@@ -359,6 +376,40 @@ return <div>Content</div>;`}
                     language="typescript"
                 />
 
+                <h4 className="text-lg font-semibold text-gray-900">
+                    <code>isNavigating</code> (boolean)
+                </h4>
+                <p>Indicates whether a navigation is currently in progress. This is useful for showing loading indicators during page transitions:</p>
+                <CodeBlock
+                    code={`const router = useRouter();
+
+return (
+    <div>
+        {router.isNavigating && <LoadingSpinner />}
+        <main>{/* page content */}</main>
+    </div>
+);`}
+                    language="tsx"
+                />
+
+                <h4 className="text-lg font-semibold text-gray-900">
+                    <code>isPending</code> (boolean)
+                </h4>
+                <p>
+                    Indicates when content is stale (React 18+ concurrent feature). This is true when React is rendering a new page in the background while still showing the old
+                    content:
+                </p>
+                <CodeBlock
+                    code={`const router = useRouter();
+
+return (
+    <div style={{ opacity: router.isPending ? 0.7 : 1 }}>
+        <main>{/* page content */}</main>
+    </div>
+);`}
+                    language="tsx"
+                />
+
                 <h3 className="text-xl font-semibold text-gray-900">Methods</h3>
 
                 <h4 className="text-lg font-semibold text-gray-900">
@@ -418,8 +469,9 @@ export default function OldDocsPage() {
 
                 <p className="font-semibold">Why use Redirect?</p>
                 <p>
-                    Calling <code>router.push()</code> directly during render is an anti-pattern that can cause issues. The <code>Redirect</code> component uses{" "}
-                    <code>useEffect</code> internally to ensure navigation happens after the component mounts, following React best practices.
+                    Calling <code>router.push()</code> directly during render is an anti-pattern in React that can cause issues. The <code>Redirect</code> component uses{" "}
+                    <code>useLayoutEffect</code> internally to ensure navigation happens after the component mounts but before paint, following React best practices and preventing
+                    issues with server-side rendering.
                 </p>
 
                 <p className="font-semibold">Example use cases:</p>
@@ -544,6 +596,119 @@ export default function UnsavedChangesGuard() {
 }`}
                     language="typescript"
                 />
+            </section>
+
+            <section className="space-y-4">
+                <h2 className="text-2xl font-semibold text-gray-900">Smooth Navigation Transitions</h2>
+                <p>Helium provides built-in support for smooth page transitions using React 18+ concurrent features. This prevents UI freezing when navigating to heavy pages.</p>
+
+                <h3 className="text-xl font-semibold text-gray-900">useDeferredNavigation Hook</h3>
+                <p>
+                    The <code>useDeferredNavigation</code> hook integrates <code>useDeferredValue</code> and <code>useTransition</code> with the router for smoother navigation:
+                </p>
+                <CodeBlock
+                    code={`import { useDeferredNavigation } from "helium/client";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+    const { isStale, isPending, isTransitioning } = useDeferredNavigation();
+
+    return (
+        <div style={{ opacity: isTransitioning ? 0.7 : 1, transition: 'opacity 150ms' }}>
+            {children}
+        </div>
+    );
+}`}
+                    language="tsx"
+                />
+
+                <p className="font-semibold">Returned values:</p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>
+                        <code>path</code> (string): Current path being navigated to
+                    </li>
+                    <li>
+                        <code>deferredPath</code> (string): Deferred path (may lag behind during transitions)
+                    </li>
+                    <li>
+                        <code>isStale</code> (boolean): True when showing old content while new page renders
+                    </li>
+                    <li>
+                        <code>isPending</code> (boolean): True when a navigation transition is in progress
+                    </li>
+                    <li>
+                        <code>isTransitioning</code> (boolean): True when either navigating or showing stale content
+                    </li>
+                </ul>
+
+                <h3 className="text-xl font-semibold text-gray-900">PageTransition Component</h3>
+                <p>
+                    The <code>PageTransition</code> component handles all navigation transition complexity with a simple API:
+                </p>
+                <CodeBlock
+                    code={`import { PageTransition } from "helium/client";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <div>
+            <Header />
+            <PageTransition
+                loadingClassName="opacity-50 transition-opacity"
+                fallback={<LoadingSpinner />}
+            >
+                {children}
+            </PageTransition>
+            <Footer />
+        </div>
+    );
+}`}
+                    language="tsx"
+                />
+
+                <p className="font-semibold">Props:</p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>
+                        <code>children</code> (ReactNode): Content to wrap
+                    </li>
+                    <li>
+                        <code>loadingClassName</code> (string, optional): CSS class applied during transitions
+                    </li>
+                    <li>
+                        <code>loadingStyle</code> (CSSProperties, optional): Inline styles applied during transitions
+                    </li>
+                    <li>
+                        <code>fallback</code> (ReactNode, optional): Suspense fallback for lazy-loaded pages
+                    </li>
+                </ul>
+
+                <p className="font-semibold">With Tailwind CSS:</p>
+                <CodeBlock
+                    code={`<PageTransition
+    loadingClassName="opacity-60 transition-opacity duration-150"
+    fallback={<div className="animate-pulse">Loading...</div>}
+>
+    {children}
+</PageTransition>`}
+                    language="tsx"
+                />
+
+                <h3 className="text-xl font-semibold text-gray-900">How It Works</h3>
+                <ol className="list-decimal list-inside space-y-1 ml-4">
+                    <li>
+                        <strong>Lazy Loading:</strong> Pages are automatically code-split and lazy-loaded
+                    </li>
+                    <li>
+                        <strong>Prefetching:</strong> Link components prefetch pages on hover/focus
+                    </li>
+                    <li>
+                        <strong>Deferred Rendering:</strong> React renders new pages in the background
+                    </li>
+                    <li>
+                        <strong>Visual Feedback:</strong> Old content fades while new content loads
+                    </li>
+                    <li>
+                        <strong>No Blocking:</strong> UI remains responsive during heavy page renders
+                    </li>
+                </ol>
             </section>
 
             <section className="space-y-4">
@@ -693,6 +858,42 @@ function trackNavigationTime(from: string, to: string) {
     // Track navigation performance
 }`}
                     language="typescript"
+                />
+
+                <h3 className="text-xl font-semibold text-gray-900">Global Loading Indicator</h3>
+                <CodeBlock
+                    code={`// src/components/NavigationLoader.tsx
+import { useRouter } from "helium/client";
+
+export default function NavigationLoader() {
+    const router = useRouter();
+
+    if (!router.isNavigating) {
+        return null;
+    }
+
+    return (
+        <div className="fixed top-0 left-0 right-0 z-50">
+            <div className="h-1 bg-teal-500 animate-pulse" />
+        </div>
+    );
+}
+
+// Use in your root layout
+// src/pages/_layout.tsx
+import NavigationLoader from "../components/NavigationLoader";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <div>
+            <NavigationLoader />
+            <header>Global Header</header>
+            <main>{children}</main>
+            <footer>Global Footer</footer>
+        </div>
+    );
+}`}
+                    language="tsx"
                 />
             </section>
 
