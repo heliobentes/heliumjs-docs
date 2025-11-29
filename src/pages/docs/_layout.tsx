@@ -146,6 +146,30 @@ export default function DocsLayout({ children }: LayoutProps) {
         return expanded;
     });
 
+    const [expandedSections, setExpandedSections] = useState<Set<string>>(() => {
+        const expanded = new Set<string>();
+        // Expand section if it contains the current route
+        menuItems.forEach((section) => {
+            if (section.items) {
+                const hasActiveItem = section.items.some((item) => {
+                    if (router.path === item.href) return true;
+                    if (item.subItems) {
+                        return item.subItems.some((sub) => router.path === sub.href);
+                    }
+                    return false;
+                });
+                if (hasActiveItem) {
+                    expanded.add(section.title);
+                }
+            }
+        });
+        // Default expand "Getting Started" if nothing else is active
+        if (expanded.size === 0) {
+            expanded.add("Getting Started");
+        }
+        return expanded;
+    });
+
     useEffect(() => {
         setIsMobileMenuOpen(false);
         // Auto-expand parent when navigating to a subpage
@@ -155,6 +179,22 @@ export default function DocsLayout({ children }: LayoutProps) {
         if (router.path.startsWith("/docs/core-concepts/http-handlers")) {
             setExpandedItems((prev) => new Set([...prev, "/docs/core-concepts/http-handlers"]));
         }
+
+        // Auto-expand section when navigating
+        menuItems.forEach((section) => {
+            if (section.items) {
+                const hasActiveItem = section.items.some((item) => {
+                    if (router.path === item.href) return true;
+                    if (item.subItems) {
+                        return item.subItems.some((sub) => router.path === sub.href);
+                    }
+                    return false;
+                });
+                if (hasActiveItem) {
+                    setExpandedSections((prev) => new Set([...prev, section.title]));
+                }
+            }
+        });
     }, [router.path]);
 
     const toggleExpanded = (href: string) => {
@@ -164,6 +204,18 @@ export default function DocsLayout({ children }: LayoutProps) {
                 next.delete(href);
             } else {
                 next.add(href);
+            }
+            return next;
+        });
+    };
+
+    const toggleSection = (title: string) => {
+        setExpandedSections((prev) => {
+            const next = new Set(prev);
+            if (next.has(title)) {
+                next.delete(title);
+            } else {
+                next.add(title);
             }
             return next;
         });
@@ -183,7 +235,7 @@ export default function DocsLayout({ children }: LayoutProps) {
                         href={item.href}
                         target={item.target}
                         className={cn(
-                            "flex-1 flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                            "flex-1 flex items-center gap-3 px-3 py-3 lg:py-1.5 rounded-md text-sm font-medium transition-colors",
                             !hasSubItems && isActive(item.href)
                                 ? "bg-teal-50 text-teal-700"
                                 : isActiveParent(item.href) && hasSubItems
@@ -197,7 +249,7 @@ export default function DocsLayout({ children }: LayoutProps) {
                     {hasSubItems && (
                         <button
                             onClick={() => toggleExpanded(item.href)}
-                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-teal-50 rounded-md cursor-pointer"
+                            className="p-3 lg:p-1.5 text-gray-500 hover:text-gray-700 hover:bg-teal-50 rounded-md cursor-pointer"
                             aria-label={isExpanded ? "Collapse submenu" : "Expand submenu"}
                         >
                             {isExpanded ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}
@@ -205,13 +257,13 @@ export default function DocsLayout({ children }: LayoutProps) {
                     )}
                 </div>
                 {hasSubItems && isExpanded && (
-                    <div className="ml-6 mt-1 space-y-1 border-l border-gray-200 pl-2">
+                    <div className="ml-6 mt-0.5 space-y-0.5 border-l border-gray-200 pl-2">
                         {item.subItems!.map((subItem) => (
                             <Link
                                 key={subItem.href}
                                 href={subItem.href}
                                 className={cn(
-                                    "flex items-center gap-3 px-3 py-1.5 rounded-md text-sm transition-colors",
+                                    "flex items-center gap-3 px-3 py-2 lg:py-1 rounded-md text-sm transition-colors",
                                     isActive(subItem.href) ? "bg-teal-50 text-teal-700 font-medium" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                                 )}
                             >
@@ -226,7 +278,7 @@ export default function DocsLayout({ children }: LayoutProps) {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-8 py-8 px-4">
+        <div className="flex flex-col lg:flex-row gap-8 py-6 px-4">
             <div className="lg:hidden mb-4">
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -238,29 +290,45 @@ export default function DocsLayout({ children }: LayoutProps) {
             </div>
 
             <aside className={cn("w-full lg:w-56 shrink-0", isMobileMenuOpen ? "block" : "hidden lg:block")}>
-                <nav className="sticky top-24 space-y-8">
-                    {menuItems.map((section, i) => (
-                        <div key={i}>
-                            {section.items ? (
-                                <>
-                                    <h3 className="font-semibold text-gray-900 mb-3 px-3">{section.title}</h3>
-                                    <div className="space-y-1">{section.items.map((item) => renderMenuItem(item))}</div>
-                                </>
-                            ) : (
-                                <Link
-                                    href={section.href!}
-                                    className={cn(
-                                        "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                                        router.path === section.href ? "bg-teal-50 text-teal-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                                    )}
-                                >
-                                    {section.icon && <section.icon size={18} />}
-                                    {section.title}
-                                </Link>
-                            )}
+                <div className="sticky top-20">
+                    <nav className="max-h-[calc(100vh-6rem)] overflow-y-auto space-y-2 pb-10 pr-1">
+                        <div className="px-3 mb-4">
+                            <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Version</div>
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-100 text-teal-800">v0.2.5</span>
                         </div>
-                    ))}
-                </nav>
+                        {menuItems.map((section, i) => (
+                            <div key={i}>
+                                {section.items ? (
+                                    <div className="mb-1">
+                                        <button
+                                            onClick={() => toggleSection(section.title)}
+                                            className="flex items-center justify-between w-full px-3 py-3 lg:py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors group cursor-pointer"
+                                        >
+                                            {section.title}
+                                            {expandedSections.has(section.title) ? (
+                                                <IconChevronDown size={16} className="text-gray-400 group-hover:text-gray-600" />
+                                            ) : (
+                                                <IconChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
+                                            )}
+                                        </button>
+                                        {expandedSections.has(section.title) && <div className="mt-1 space-y-0.5">{section.items.map((item) => renderMenuItem(item))}</div>}
+                                    </div>
+                                ) : (
+                                    <Link
+                                        href={section.href!}
+                                        className={cn(
+                                            "flex items-center gap-3 px-3 py-3 lg:py-1.5 rounded-md text-sm font-medium transition-colors",
+                                            router.path === section.href ? "bg-teal-50 text-teal-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                        )}
+                                    >
+                                        {section.icon && <section.icon size={18} />}
+                                        {section.title}
+                                    </Link>
+                                )}
+                            </div>
+                        ))}
+                    </nav>
+                </div>
             </aside>
             <div className="flex-1 min-w-0">
                 <div className="prose prose-teal max-w-none">
