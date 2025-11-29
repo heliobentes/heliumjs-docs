@@ -2,14 +2,15 @@
 import { Link } from "heliumts/client";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function RoutingExamples() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Routing Examples</h1>
+            <Heading level={1}>Routing Examples</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Blog with Dynamic Routes</h2>
+                <Heading level={2}>Blog with Dynamic Routes</Heading>
                 <p>A complete blog implementation with dynamic routes:</p>
                 <CodeBlock
                     code={`// src/pages/blog/[slug].tsx
@@ -56,7 +57,7 @@ export default function BlogPost({ post }: { post: BlogPost }) {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Search with Query Parameters</h2>
+                <Heading level={2}>Search with Query Parameters</Heading>
                 <p>Handle search queries using URL parameters:</p>
                 <CodeBlock
                     code={`// src/pages/search.tsx
@@ -122,7 +123,7 @@ export default function SearchPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Authentication Guard</h2>
+                <Heading level={2}>Authentication Guard</Heading>
                 <p>Protect routes with authentication using the Redirect component:</p>
                 <CodeBlock
                     code={`// src/components/AuthGuard.tsx
@@ -167,7 +168,7 @@ export default function Dashboard() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Breadcrumb Navigation</h2>
+                <Heading level={2}>Breadcrumb Navigation</Heading>
                 <p>Build breadcrumbs based on the current route:</p>
                 <CodeBlock
                     code={`// src/components/Breadcrumbs.tsx
@@ -215,7 +216,7 @@ export default function Breadcrumbs() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Analytics Tracking</h2>
+                <Heading level={2}>Analytics Tracking</Heading>
                 <p>Track page views using router events:</p>
                 <CodeBlock
                     code={`// src/components/Analytics.tsx
@@ -272,7 +273,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Navigation Loading Indicator</h2>
+                <Heading level={2}>Navigation Loading Indicator</Heading>
                 <p>Show a progress bar during page transitions:</p>
                 <CodeBlock
                     code={`// src/components/NavigationProgress.tsx
@@ -327,7 +328,7 @@ export default function NavigationProgress() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Scroll Restoration</h2>
+                <Heading level={2}>Scroll Restoration</Heading>
                 <p>Control scroll behavior when navigating between pages:</p>
                 <CodeBlock
                     code={`// Scroll to top on navigation (default behavior)
@@ -348,7 +349,7 @@ router.push("/settings", { scrollToTop: false });`}
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Related</h2>
+                <Heading level={2}>Related</Heading>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>
                         <Link href="/docs/core-concepts/routing">Routing Overview</Link> - File-based routing basics

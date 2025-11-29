@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function Configuration() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Configuration</h1>
+            <Heading level={1}>Configuration</Heading>
             <p>Helium's configuration file allows you to customize server settings including RPC encoding, compression, security, and proxy configuration.</p>
 
             <p>

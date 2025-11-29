@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function AuthenticationGuide() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Authentication</h1>
+            <Heading level={1}>Authentication</Heading>
 
             <p>
                 This guide shows how to integrate authentication with HeliumTS using Better Auth. The same pattern works for other auth libraries like Auth.js, Clerk, or any
@@ -12,15 +13,17 @@ export default function AuthenticationGuide() {
             </p>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Better Auth Example</h2>
+                <Heading level={2}>Better Auth Example</Heading>
                 <p>Better Auth is a modern authentication library with excellent TypeScript support.</p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mt-4">Installation</h3>
+                <Heading level={3} className="mt-4">
+                    Installation
+                </Heading>
                 <CodeBlock code={`npm install better-auth`} language="bash" />
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Setup Auth Configuration</h2>
+                <Heading level={2}>Setup Auth Configuration</Heading>
                 <p>Create your auth configuration file:</p>
                 <p className="text-sm text-gray-600">
                     <code>src/libs/better-auth/auth.ts</code>
@@ -64,7 +67,7 @@ export const auth = betterAuth({
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Create Auth Handler</h2>
+                <Heading level={2}>Create Auth Handler</Heading>
                 <p>Use a catch-all route to handle all auth endpoints:</p>
                 <p className="text-sm text-gray-600">
                     <code>src/server/auth.ts</code>
@@ -84,7 +87,7 @@ export const betterAuthHttp = defineHTTPRequest("ALL", "/api/auth/*", async (req
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Protecting RPC Endpoints</h2>
+                <Heading level={2}>Protecting RPC Endpoints</Heading>
                 <p>Add authentication check in your global middleware:</p>
                 <p className="text-sm text-gray-600">
                     <code>src/server/_middleware.ts</code>
@@ -135,7 +138,7 @@ export const updateProfile = defineRPC(async (data: { name: string }, ctx) => {
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Client-Side Usage</h2>
+                <Heading level={2}>Client-Side Usage</Heading>
                 <p>Create a client instance with React hooks:</p>
                 <p className="text-sm text-gray-600">
                     <code>src/libs/better-auth/auth-client.ts</code>
@@ -189,10 +192,12 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Using Other Auth Libraries</h2>
+                <Heading level={2}>Using Other Auth Libraries</Heading>
                 <p>The same pattern works for any auth library that uses standard Web API Request/Response:</p>
 
-                <h3 className="text-lg font-semibold text-gray-900 mt-4">Auth.js (NextAuth)</h3>
+                <Heading level={3} className="mt-4">
+                    Auth.js (NextAuth)
+                </Heading>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
 import { handlers } from "./auth"; // Your Auth.js config
@@ -204,7 +209,9 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
                     language="typescript"
                 />
 
-                <h3 className="text-lg font-semibold text-gray-900 mt-4">Clerk</h3>
+                <Heading level={3} className="mt-4">
+                    Clerk
+                </Heading>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
 import { clerkClient } from "@clerk/clerk-sdk-node";
@@ -222,7 +229,7 @@ export const clerkWebhook = defineHTTPRequest("POST", "/webhooks/clerk", async (
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Always use HTTPS in production</li>
                     <li>Store sensitive credentials in environment variables</li>

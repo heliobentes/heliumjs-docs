@@ -1,16 +1,19 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function ProxyConfiguration() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Proxy Configuration for IP Detection</h1>
+            <Heading level={1}>Proxy Configuration for IP Detection</Heading>
             <p>
                 When deploying behind proxies (like Vercel, Cloudflare, AWS ALB, etc.), accurate client IP detection is crucial for rate limiting and connection limits. Without
                 proper proxy configuration, the system might identify the proxy server's IP instead of the real client IP.
             </p>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Configuration</h2>
+            <Heading level={2} className="mt-8">
+                Configuration
+            </Heading>
             <p>
                 Use the <code>trustProxyDepth</code> setting in your <code>helium.config.ts</code>:
             </p>
@@ -25,7 +28,9 @@ export default config;`}
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">How It Works</h2>
+            <Heading level={2} className="mt-8">
+                How It Works
+            </Heading>
             <p>Helium checks multiple headers to extract the client IP, in order of reliability:</p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>
@@ -45,15 +50,21 @@ export default config;`}
                 </li>
             </ol>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Common Deployment Scenarios</h2>
+            <Heading level={2} className="mt-8">
+                Common Deployment Scenarios
+            </Heading>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Vercel / Netlify / Railway / DigitalOcean APPs</h3>
+            <Heading level={3} className="mt-6">
+                Vercel / Netlify / Railway / DigitalOcean APPs
+            </Heading>
             <p>
                 <code>trustProxyDepth: 1</code>
             </p>
             <p>These platforms add one proxy layer.</p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Cloudflare → Your Server</h3>
+            <Heading level={3} className="mt-6">
+                Cloudflare → Your Server
+            </Heading>
             <p>
                 <code>trustProxyDepth: 1</code>
             </p>
@@ -61,19 +72,25 @@ export default config;`}
                 Helium automatically uses the <code>CF-Connecting-IP</code> header.
             </p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Cloudflare → Nginx → Node.js</h3>
+            <Heading level={3} className="mt-6">
+                Cloudflare → Nginx → Node.js
+            </Heading>
             <p>
                 <code>trustProxyDepth: 2</code>
             </p>
             <p>With two proxy layers (Nginx + Cloudflare).</p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Local Development</h3>
+            <Heading level={3} className="mt-6">
+                Local Development
+            </Heading>
             <p>
                 <code>trustProxyDepth: 0</code> (Default)
             </p>
             <p>No proxies in local development.</p>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Security Considerations</h2>
+            <Heading level={2} className="mt-8">
+                Security Considerations
+            </Heading>
             <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
                     <strong>Setting trustProxyDepth Too Low:</strong> Rate limiting will apply to the proxy IP, affecting all users.

@@ -1,15 +1,16 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function StripeGuide() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Stripe Webhooks</h1>
+            <Heading level={1}>Stripe Webhooks</Heading>
 
             <p>This guide shows how to handle Stripe webhooks with HeliumTS.</p>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Setup</h2>
+                <Heading level={2}>Setup</Heading>
                 <p>First, install the Stripe SDK:</p>
                 <CodeBlock code={`npm install stripe`} language="bash" />
                 <p>Add your Stripe keys to your environment variables:</p>
@@ -21,7 +22,7 @@ STRIPE_WEBHOOK_SECRET=whsec_...`}
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Webhook Handler</h2>
+                <Heading level={2}>Webhook Handler</Heading>
                 <p>Handle Stripe webhooks to process events like successful payments:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -111,7 +112,7 @@ export const stripeWebhook = defineHTTPRequest("POST", "/webhooks/stripe", async
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Testing Webhooks Locally</h2>
+                <Heading level={2}>Testing Webhooks Locally</Heading>
                 <p>Use Stripe CLI to forward webhooks to your local server:</p>
                 <CodeBlock
                     code={`# Install Stripe CLI
@@ -130,7 +131,7 @@ stripe listen --forward-to localhost:3000/webhooks/stripe`}
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Always verify webhook signatures to prevent fraud</li>
                     <li>Use environment variables for API keys and secrets</li>

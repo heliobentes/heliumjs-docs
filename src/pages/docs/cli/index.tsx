@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function CLI() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">CLI Reference</h1>
+            <Heading level={1}>CLI Reference</Heading>
 
             <div className="space-y-4">
                 <div>

@@ -1,14 +1,19 @@
 "use ssg";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function UseRouter() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">useRouter Hook</h1>
+            <Heading level={1} className="text-3xl font-bold text-gray-900">
+                useRouter Hook
+            </Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    Overview
+                </Heading>
                 <p>
                     The <code>useRouter</code> hook provides access to routing information and navigation methods.
                 </p>
@@ -32,11 +37,13 @@ export default function MyComponent() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Properties</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    Properties
+                </Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>path</code> (string)
-                </h3>
+                </Heading>
                 <p>Current pathname (without query string):</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -44,9 +51,9 @@ console.log(router.path);  // "/blog/my-post"`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>params</code> (Record&lt;string, string | string[]&gt;)
-                </h3>
+                </Heading>
                 <p>Dynamic route parameters:</p>
                 <CodeBlock
                     code={`// URL: /users/123
@@ -59,9 +66,9 @@ console.log(router.params.slug);  // ["guide", "getting-started"]`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>searchParams</code> (URLSearchParams)
-                </h3>
+                </Heading>
                 <p>URL query parameters:</p>
                 <CodeBlock
                     code={`// URL: /search?q=hello&page=2
@@ -75,9 +82,9 @@ console.log(allParams);  // { q: "hello", page: "2" }`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>status</code> (200 | 404)
-                </h3>
+                </Heading>
                 <p>Current route status:</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -90,9 +97,9 @@ return <div>Content</div>;`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>isNavigating</code> (boolean)
-                </h3>
+                </Heading>
                 <p>Indicates whether a navigation is currently in progress. Useful for showing loading indicators:</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -106,9 +113,9 @@ return (
                     language="tsx"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>isPending</code> (boolean)
-                </h3>
+                </Heading>
                 <p>Indicates when content is stale (React 18+ concurrent feature). True when React is rendering a new page in the background while still showing old content:</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -123,11 +130,13 @@ return (
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Methods</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    Methods
+                </Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>push(href: string)</code>
-                </h3>
+                </Heading>
                 <p>Navigate to a new route (adds to history):</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -138,9 +147,9 @@ router.push("/search?q=hello");`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>replace(href: string)</code>
-                </h3>
+                </Heading>
                 <p>Navigate to a new route (replaces current history entry):</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -150,9 +159,9 @@ router.replace("/login");`}
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
                     <code>on(event, listener)</code>
-                </h3>
+                </Heading>
                 <p>Subscribe to router events. Returns an unsubscribe function:</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -171,9 +180,13 @@ useEffect(() => {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Router Events</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    Router Events
+                </Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">Event Types</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Event Types
+                </Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>"navigation"</code>: Fires after navigation completes
@@ -183,7 +196,9 @@ useEffect(() => {
                     </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-gray-900">Event Object</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Event Object
+                </Heading>
                 <CodeBlock
                     code={`{
     from: string;    // Previous path
@@ -193,7 +208,9 @@ useEffect(() => {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Navigation Event</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Navigation Event
+                </Heading>
                 <p>Fires after navigation completes:</p>
                 <CodeBlock
                     code={`import { useRouter } from "heliumts/client";
@@ -216,7 +233,9 @@ export default function Analytics() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Before Navigation Event</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Before Navigation Event
+                </Heading>
                 <p>Fires before navigation and can be prevented:</p>
                 <CodeBlock
                     code={`import { useRouter } from "heliumts/client";
@@ -249,9 +268,13 @@ export default function UnsavedChangesGuard() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">TypeScript Support</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    TypeScript Support
+                </Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">Typing Route Params</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Typing Route Params
+                </Heading>
                 <CodeBlock
                     code={`import { useRouter } from "heliumts/client";
 
@@ -269,7 +292,9 @@ export default function UserPage() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Typing Search Params</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Typing Search Params
+                </Heading>
                 <CodeBlock
                     code={`import { useRouter } from "heliumts/client";
 
@@ -287,9 +312,13 @@ export default function SearchPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Troubleshooting</h2>
+                <Heading level={2} className="text-2xl font-semibold text-gray-900">
+                    Troubleshooting
+                </Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">useRouter throws "must be used inside &lt;AppRouter&gt;"</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    useRouter throws "must be used inside &lt;AppRouter&gt;"
+                </Heading>
                 <p>
                     <strong>Cause:</strong> <code>useRouter</code> called outside the router context
                 </p>
@@ -305,7 +334,9 @@ export default function App({ Component, pageProps }: AppShellProps) {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Dynamic params are undefined</h3>
+                <Heading level={3} className="text-xl font-semibold text-gray-900">
+                    Dynamic params are undefined
+                </Heading>
                 <p>
                     <strong>Cause:</strong> Wrong param name or file structure
                 </p>

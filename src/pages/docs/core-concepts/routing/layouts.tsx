@@ -1,14 +1,15 @@
 "use ssg";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function RoutingLayouts() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Layouts</h1>
+            <Heading level={1}>Layouts</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
+                <Heading level={2}>Overview</Heading>
                 <p>
                     Layouts allow you to share UI between pages. They wrap page components and can be nested to create complex page structures with shared headers, sidebars, and
                     footers.
@@ -34,7 +35,7 @@ export default function RoutingLayouts() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Root Layout</h2>
+                <Heading level={2}>Root Layout</Heading>
                 <p>
                     Create <code>_layout.tsx</code> at the root of <code>src/pages</code> to wrap <strong>all pages</strong>:
                 </p>
@@ -63,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Group Layouts</h2>
+                <Heading level={2}>Group Layouts</Heading>
                 <p>
                     Create <code>_layout.tsx</code> inside route groups to wrap <strong>only pages in that group</strong>:
                 </p>
@@ -118,7 +119,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Nested Layouts</h2>
+                <Heading level={2}>Nested Layouts</Heading>
                 <p>Layouts can be nested in subdirectories for more complex UI structures:</p>
                 <CodeBlock
                     code={`src/pages/
@@ -133,7 +134,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                     language="plaintext"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Rendering Order</h3>
+                <Heading level={3}>Rendering Order</Heading>
                 <p>Layouts render from outer to inner (Root → Group → Nested):</p>
                 <CodeBlock
                     code={`<RootLayout>
@@ -146,7 +147,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                     language="tsx"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Settings Layout Example</h3>
+                <Heading level={3}>Settings Layout Example</Heading>
                 <CodeBlock
                     code={`// src/pages/(app)/settings/_layout.tsx
 import { Link, useRouter } from "heliumts/client";
@@ -184,7 +185,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Layout Props</h2>
+                <Heading level={2}>Layout Props</Heading>
                 <p>
                     Layouts receive a <code>children</code> prop containing the page content:
                 </p>
@@ -212,7 +213,7 @@ export default function Layout({ children }: LayoutProps) {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Layout Best Practices</h2>
+                <Heading level={2}>Layout Best Practices</Heading>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
                     <li>
                         <strong>Keep layouts focused:</strong> Each layout should handle one level of UI structure

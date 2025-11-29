@@ -2,14 +2,15 @@
 import { Link } from "heliumts/client";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function RoutingOverview() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Routing</h1>
+            <Heading level={1}>Routing</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
+                <Heading level={2}>Overview</Heading>
                 <p>
                     HeliumTS uses file-based routing similar to Next.js Pages Router. Pages are automatically mapped to routes based on their file path in the{" "}
                     <code>src/pages</code> directory. The framework provides a powerful routing system with support for dynamic routes, catch-all routes, layouts, and route groups.
@@ -53,9 +54,9 @@ export default function RoutingOverview() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">File-Based Routing</h2>
+                <Heading level={2}>File-Based Routing</Heading>
 
-                <h3 className="text-xl font-semibold text-gray-900">Basic Routes</h3>
+                <Heading level={3}>Basic Routes</Heading>
                 <p>
                     Files in <code>src/pages</code> are automatically mapped to routes:
                 </p>
@@ -70,7 +71,7 @@ export default function RoutingOverview() {
                     language="plaintext"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Dynamic Routes</h3>
+                <Heading level={3}>Dynamic Routes</Heading>
                 <p>
                     Use square brackets <code>[param]</code> to create dynamic routes:
                 </p>
@@ -100,7 +101,7 @@ export default function UserPage() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Catch-All Routes</h3>
+                <Heading level={3}>Catch-All Routes</Heading>
                 <p>
                     Use <code>[...param]</code> to match any number of path segments:
                 </p>
@@ -125,7 +126,7 @@ export default function DocsPage() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Index Routes</h3>
+                <Heading level={3}>Index Routes</Heading>
                 <p>
                     Files named <code>index.tsx</code> represent the root of their directory:
                 </p>
@@ -142,7 +143,7 @@ export default function DocsPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Route Groups</h2>
+                <Heading level={2}>Route Groups</Heading>
                 <p>Route groups allow you to organize pages without affecting URLs. Wrap folder names in parentheses:</p>
                 <CodeBlock
                     code={`src/pages/
@@ -173,7 +174,7 @@ export default function DocsPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Layouts</h2>
+                <Heading level={2}>Layouts</Heading>
                 <p>
                     Layouts allow you to share UI between pages. Create <code>_layout.tsx</code> files to wrap pages with shared headers, sidebars, and footers.
                 </p>
@@ -183,7 +184,7 @@ export default function DocsPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Route Collision Detection</h2>
+                <Heading level={2}>Route Collision Detection</Heading>
                 <p>Helium automatically detects when multiple files resolve to the same URL:</p>
                 <CodeBlock
                     code={`❌ Route collision detected! Multiple files resolve to the same path "/":

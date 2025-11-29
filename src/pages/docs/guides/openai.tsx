@@ -1,15 +1,16 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function OpenAIGuide() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Using OpenAI API</h1>
+            <Heading level={1}>Using OpenAI API</Heading>
 
             <p>This guide shows how to integrate OpenAI's API with HeliumTS for both streaming and non-streaming completions.</p>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Setup</h2>
+                <Heading level={2}>Setup</Heading>
                 <p>First, install the OpenAI SDK:</p>
                 <CodeBlock code={`npm install openai`} language="bash" />
                 <p>Add your API key to your environment variables:</p>
@@ -17,7 +18,7 @@ export default function OpenAIGuide() {
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Non-Streaming Example (RPC)</h2>
+                <Heading level={2}>Non-Streaming Example (RPC)</Heading>
                 <p>For simple request-response patterns, use RPC:</p>
                 <CodeBlock
                     code={`import { defineRPC } from "heliumts/server";
@@ -77,7 +78,7 @@ export default function ChatPage() {
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Streaming Example (HTTP)</h2>
+                <Heading level={2}>Streaming Example (HTTP)</Heading>
                 <p>For real-time chat interfaces with token-by-token streaming, use HTTP handlers:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -149,7 +150,7 @@ export const chatCompletionStream = defineHTTPRequest("POST", "/api/chat/stream"
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Client-Side Usage</h2>
+                <Heading level={2}>Client-Side Usage</Heading>
                 <p>Example of consuming the streaming endpoint from the client:</p>
                 <CodeBlock
                     code={`async function streamChat(message: string) {
@@ -190,7 +191,7 @@ export const chatCompletionStream = defineHTTPRequest("POST", "/api/chat/stream"
             </div>
 
             <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Always validate user input before sending to OpenAI</li>
                     <li>Implement rate limiting to prevent API abuse</li>

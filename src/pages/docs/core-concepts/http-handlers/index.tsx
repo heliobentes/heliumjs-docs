@@ -2,14 +2,15 @@
 import { Link } from "heliumts/client";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function HttpHandlersOverview() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">HTTP Handlers</h1>
+            <Heading level={1}>HTTP Handlers</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
+                <Heading level={2}>Overview</Heading>
                 <p>
                     HeliumTS provides <code>defineHTTPRequest</code> for creating custom HTTP endpoints. This is useful for:
                 </p>
@@ -35,7 +36,7 @@ export default function HttpHandlersOverview() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Basic Usage</h2>
+                <Heading level={2}>Basic Usage</Heading>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
 
@@ -50,7 +51,7 @@ export const myEndpoint = defineHTTPRequest("GET", "/api/hello", async (req, ctx
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Dynamic Routes</h2>
+                <Heading level={2}>Dynamic Routes</Heading>
                 <p>
                     Use <code>:param</code> syntax for dynamic path segments:
                 </p>
@@ -71,7 +72,7 @@ export const getProduct = defineHTTPRequest("GET", "/api/products/:category/:id"
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Catch-All Routes</h2>
+                <Heading level={2}>Catch-All Routes</Heading>
                 <p>
                     Use <code>*</code> to match any remaining path segments (useful for auth providers):
                 </p>
@@ -89,7 +90,7 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Request Object</h2>
+                <Heading level={2}>Request Object</Heading>
                 <CodeBlock
                     code={`export const myHandler = defineHTTPRequest("POST", "/api/data", async (req, ctx) => {
     // HTTP method
@@ -118,7 +119,7 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Request Properties</h3>
+                <Heading level={3}>Request Properties</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>req.method</code> - HTTP method (GET, POST, etc.)
@@ -148,7 +149,7 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Response Headers & Status Codes</h2>
+                <Heading level={2}>Response Headers & Status Codes</Heading>
                 <p>
                     Return a standard Web API <code>Response</code> object for full control:
                 </p>
@@ -182,7 +183,7 @@ export const errorExample = defineHTTPRequest("POST", "/api/resource", async (re
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Common Status Codes</h3>
+                <Heading level={3}>Common Status Codes</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>200</code> - OK
@@ -209,7 +210,7 @@ export const errorExample = defineHTTPRequest("POST", "/api/resource", async (re
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Streaming Responses</h2>
+                <Heading level={2}>Streaming Responses</Heading>
                 <CodeBlock
                     code={`export const streamData = defineHTTPRequest("GET", "/api/stream", async (req, ctx) => {
     const stream = new ReadableStream({
@@ -236,7 +237,7 @@ export const errorExample = defineHTTPRequest("POST", "/api/resource", async (re
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Converting to Web Request</h2>
+                <Heading level={2}>Converting to Web Request</Heading>
                 <p>
                     Use <code>toWebRequest()</code> to convert Helium's request to a standard Web API <code>Request</code> for third-party libraries:
                 </p>
@@ -256,7 +257,7 @@ export const authHandler = defineHTTPRequest("ALL", "/auth/*", async (req, ctx) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         Use <code>Response</code> objects when you need custom headers or status codes

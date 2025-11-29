@@ -1,135 +1,11 @@
-import {
-    IconAppWindow,
-    IconArrowsShuffle,
-    IconBolt,
-    IconChevronDown,
-    IconChevronRight,
-    IconCloud,
-    IconCloudDollar,
-    IconCode,
-    IconCursorText,
-    IconDatabase,
-    IconDeviceDesktopCode,
-    IconExternalLink,
-    IconFileCode,
-    IconFolder,
-    IconKeyframeAlignCenter,
-    IconLink,
-    IconMenu2,
-    IconRoute,
-    IconServer,
-    IconSettings,
-    IconShield,
-    IconSparkles,
-    IconTerminal,
-    IconWorld,
-    IconX,
-} from "@tabler/icons-react";
-import type { LayoutProps } from "heliumts/client";
-import { Link, useRouter } from "heliumts/client";
+import { IconChevronDown, IconChevronRight, IconExternalLink, IconMenu2, IconX } from "@tabler/icons-react";
+import { type LayoutProps, Link, useRouter } from "heliumts/client";
 import { useEffect, useState } from "react";
 
+import { Search } from "../../components/Search";
+import type { MenuItem } from "../../config/docs";
+import { menuItems } from "../../config/docs";
 import { cn } from "../../utils";
-
-interface MenuItem {
-    title: React.ReactNode;
-    icon: React.ComponentType<{ size: number }>;
-    href: string;
-    target?: string;
-    subItems?: MenuItem[];
-}
-
-interface MenuSection {
-    title: string;
-    items?: MenuItem[];
-    icon?: React.ComponentType<{ size: number }>;
-    href?: string;
-}
-
-const menuItems: MenuSection[] = [
-    {
-        title: "Getting Started",
-        items: [
-            {
-                title: "Introduction",
-                icon: IconBolt,
-                href: "/docs/getting-started",
-            },
-            {
-                title: "Installation",
-                icon: IconDeviceDesktopCode,
-                href: "/docs/getting-started/installation",
-            },
-            {
-                title: "Project Structure",
-                icon: IconFolder,
-                href: "/docs/getting-started/project-structure",
-            },
-            {
-                title: (
-                    <>
-                        Example App <IconExternalLink size={16} />
-                    </>
-                ),
-                icon: IconAppWindow,
-                href: "https://github.com/heliobentes/heliumts-example-app",
-                target: "_blank",
-            },
-        ],
-    },
-    {
-        title: "Core Concepts",
-        items: [
-            { title: "RPC", icon: IconServer, href: "/docs/core-concepts/rpc" },
-            {
-                title: "Routing",
-                icon: IconRoute,
-                href: "/docs/core-concepts/routing",
-                subItems: [
-                    { title: "Overview", icon: IconRoute, href: "/docs/core-concepts/routing" },
-                    { title: "Navigation", icon: IconLink, href: "/docs/core-concepts/routing/navigation" },
-                    { title: "useRouter Hook", icon: IconCursorText, href: "/docs/core-concepts/routing/use-router" },
-                    { title: "Layouts", icon: IconAppWindow, href: "/docs/core-concepts/routing/layouts" },
-                    { title: "Page Transitions", icon: IconArrowsShuffle, href: "/docs/core-concepts/routing/transitions" },
-                    { title: "Examples", icon: IconCode, href: "/docs/core-concepts/routing/examples" },
-                ],
-            },
-            {
-                title: "HTTP Handlers",
-                icon: IconWorld,
-                href: "/docs/core-concepts/http-handlers",
-                subItems: [
-                    { title: "Overview", icon: IconWorld, href: "/docs/core-concepts/http-handlers" },
-                    { title: "Examples", icon: IconCode, href: "/docs/core-concepts/http-handlers/examples" },
-                ],
-            },
-            { title: "Middleware", icon: IconKeyframeAlignCenter, href: "/docs/core-concepts/middleware" },
-            { title: "Configuration", icon: IconSettings, href: "/docs/core-concepts/configuration" },
-            { title: "SSG", icon: IconFileCode, href: "/docs/core-concepts/ssg" },
-        ],
-    },
-    {
-        title: "Guides",
-        items: [
-            { title: "Authentication", icon: IconShield, href: "/docs/guides/authentication" },
-            { title: "Stripe Integration", icon: IconCloudDollar, href: "/docs/guides/stripe" },
-            { title: "OpenAI API", icon: IconSparkles, href: "/docs/guides/openai" },
-        ],
-    },
-    {
-        title: "Advanced",
-        items: [
-            { title: "Context API", icon: IconDatabase, href: "/docs/advanced/context-api" },
-            { title: "Proxy Config", icon: IconShield, href: "/docs/advanced/proxy-configuration" },
-            { title: "Deployment", icon: IconCloud, href: "/docs/advanced/production-deployment" },
-        ],
-    },
-    {
-        title: "CLI Reference",
-        icon: IconTerminal,
-        href: "/docs/cli",
-    },
-];
 
 export default function DocsLayout({ children }: LayoutProps) {
     const router = useRouter();
@@ -195,6 +71,21 @@ export default function DocsLayout({ children }: LayoutProps) {
                 }
             }
         });
+
+        // Handle scroll to hash
+        if (window.location.hash) {
+            const id = window.location.hash.substring(1);
+            // Small timeout to ensure content is rendered
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 100);
+        } else {
+            // Scroll to top if no hash
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
     }, [router.path]);
 
     const toggleExpanded = (href: string) => {
@@ -290,7 +181,10 @@ export default function DocsLayout({ children }: LayoutProps) {
             </div>
 
             <aside className={cn("w-full lg:w-56 shrink-0", isMobileMenuOpen ? "block" : "hidden lg:block")}>
-                <div className="sticky top-20">
+                <div className="sticky top-24">
+                    <div className="mb-4 px-3 lg:px-0">
+                        <Search />
+                    </div>
                     <nav className="max-h-[calc(100vh-6rem)] overflow-y-auto space-y-2 pb-10 pr-1">
                         <div className="px-3 mb-4">
                             <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Version</div>

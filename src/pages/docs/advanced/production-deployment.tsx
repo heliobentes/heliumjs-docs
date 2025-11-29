@@ -1,20 +1,23 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function ProductionDeployment() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Production Deployment</h1>
+            <Heading level={1}>Production Deployment</Heading>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8" id="platform-compatibility">
+            <Heading level={2} className="mt-8" id="platform-compatibility">
                 Platform Compatibility
-            </h2>
+            </Heading>
             <p>
-                Helium uses WebSocket-based RPC for real-time communication between client and server. This architecture requires a{" "}
-                <strong>persistent server process</strong>, which affects your choice of hosting platform.
+                Helium uses WebSocket-based RPC for real-time communication between client and server. This architecture requires a <strong>persistent server process</strong>,
+                which affects your choice of hosting platform.
             </p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">✅ Fully Compatible Platforms</h3>
+            <Heading level={3} className="mt-6">
+                ✅ Fully Compatible Platforms
+            </Heading>
             <p>These platforms support persistent Node.js servers and WebSocket connections:</p>
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 mt-4">
@@ -83,7 +86,9 @@ export default function ProductionDeployment() {
                 </table>
             </div>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">⚠️ Limited Compatibility Platforms</h3>
+            <Heading level={3} className="mt-6">
+                ⚠️ Limited Compatibility Platforms
+            </Heading>
             <p>These platforms have fundamental limitations that affect Helium features:</p>
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 mt-4">
@@ -118,7 +123,9 @@ export default function ProductionDeployment() {
                 </table>
             </div>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Using Helium on Vercel/Netlify (Limited Mode)</h3>
+            <Heading level={3} className="mt-6">
+                Using Helium on Vercel/Netlify (Limited Mode)
+            </Heading>
             <p>
                 If you must use Vercel or Netlify, Helium can work in <strong>SSG-only mode</strong>:
             </p>
@@ -148,13 +155,17 @@ export default function ProductionDeployment() {
 
             <hr className="my-8 border-gray-200" />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Configuration Files in Production</h2>
+            <Heading level={2} className="mt-8">
+                Configuration Files in Production
+            </Heading>
             <p>
                 When deploying your Helium application, the framework needs to load your <code>helium.config</code> file. The build process automatically handles TypeScript config
                 files for you.
             </p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Automatic Config Transpilation</h3>
+            <Heading level={3} className="mt-6">
+                Automatic Config Transpilation
+            </Heading>
             <p>
                 During <code>helium build</code>, the framework:
             </p>
@@ -174,7 +185,9 @@ export default function ProductionDeployment() {
                 root.
             </p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Deployment Structure</h3>
+            <Heading level={3} className="mt-6">
+                Deployment Structure
+            </Heading>
             <p>
                 After running <code>helium build</code>, your deployment should include:
             </p>
@@ -190,9 +203,13 @@ export default function ProductionDeployment() {
                 language="plaintext"
             />
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Platform-Specific Instructions</h3>
+            <Heading level={3} className="mt-6">
+                Platform-Specific Instructions
+            </Heading>
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Digital Ocean App Platform</h4>
+            <Heading level={4} className="mt-4">
+                Digital Ocean App Platform
+            </Heading>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>
                     Set build command: <code>npm run build</code>
@@ -216,7 +233,9 @@ export default function ProductionDeployment() {
                 </li>
             </ol>
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Docker</h4>
+            <Heading level={4} className="mt-4">
+                Docker
+            </Heading>
             <CodeBlock
                 code={`FROM node:18-alpine
 
@@ -236,7 +255,9 @@ CMD ["node", "dist/server.js"]`}
                 language="dockerfile"
             />
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Vercel / Netlify (Limited Support)</h4>
+            <Heading level={4} className="mt-4">
+                Vercel / Netlify (Limited Support)
+            </Heading>
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4">
                 <p className="font-bold">⚠️ Important</p>
                 <p>
@@ -274,7 +295,9 @@ CMD ["node", "dist/server.js"]`}
             </p>
             <CodeBlock code={`/*    /index.html   200`} language="plaintext" />
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Manual Config Conversion</h3>
+            <Heading level={3} className="mt-6">
+                Manual Config Conversion
+            </Heading>
             <p>
                 If you prefer to use <code>.js</code> config files in production without transpilation:
             </p>
@@ -307,9 +330,13 @@ export default {
                 </li>
             </ol>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Environment Variables</h2>
+            <Heading level={2} className="mt-8">
+                Environment Variables
+            </Heading>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Client-Side Environment Variables</h3>
+            <Heading level={3} className="mt-6">
+                Client-Side Environment Variables
+            </Heading>
             <p>
                 To expose environment variables to the browser, prefix them with <code>HELIUM_PUBLIC_</code>:
             </p>
@@ -347,7 +374,9 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
                 </li>
             </ul>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Using Platform Environment Variables (Recommended)</h3>
+            <Heading level={3} className="mt-6">
+                Using Platform Environment Variables (Recommended)
+            </Heading>
             <p>
                 Most cloud platforms (Digital Ocean, Vercel, Heroku, etc.) provide their own environment variable management. This is the <strong>recommended approach</strong> for
                 production:
@@ -373,7 +402,9 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
                 </li>
             </ul>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Using .env Files in Production</h3>
+            <Heading level={3} className="mt-6">
+                Using .env Files in Production
+            </Heading>
             <p>
                 If you need to deploy <code>.env</code> files, you have two options:
             </p>
@@ -400,7 +431,9 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
             </p>
             <CodeBlock code={`cd dist && node server.js`} language="bash" />
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Environment Variable Priority</h3>
+            <Heading level={3} className="mt-6">
+                Environment Variable Priority
+            </Heading>
             <p>Helium loads environment variables in this order (highest to lowest priority):</p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>
@@ -423,9 +456,13 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
                 Existing <code>process.env</code> values are never overridden by <code>.env</code> files.
             </p>
 
-            <h3 className="text-xl font-semibold text-gray-900 mt-6">Troubleshooting</h3>
+            <Heading level={3} className="mt-6">
+                Troubleshooting
+            </Heading>
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Warning: "No .env files found or no variables loaded"</h4>
+            <Heading level={4} className="mt-4">
+                Warning: "No .env files found or no variables loaded"
+            </Heading>
             <p>This warning appears when:</p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>No .env files exist (normal if using platform variables)</li>
@@ -443,7 +480,9 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
                 </li>
             </ul>
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Error: "Unknown file extension .ts"</h4>
+            <Heading level={4} className="mt-4">
+                Error: "Unknown file extension .ts"
+            </Heading>
             <p>This means the config file wasn't transpiled during build. Ensure:</p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>
@@ -457,7 +496,9 @@ HELIUM_PUBLIC_FEATURE_FLAG=true`}
                 </li>
             </ol>
 
-            <h4 className="text-lg font-semibold text-gray-900 mt-4">Config not loading in production</h4>
+            <Heading level={4} className="mt-4">
+                Config not loading in production
+            </Heading>
             <p>Check that:</p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
                 <li>

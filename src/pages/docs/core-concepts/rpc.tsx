@@ -1,15 +1,18 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function RPC() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">RPC (Remote Procedure Calls)</h1>
+            <Heading level={1}>RPC (Remote Procedure Calls)</Heading>
             <p>
                 Define server-side functions using <code>defineMethod</code> and call them from the client using <code>useCall</code> or <code>useFetch</code>.
             </p>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Server</h2>
+            <Heading level={2} className="mt-8">
+                Server
+            </Heading>
             <p>
                 <code>src/server/tasks.ts</code>
             </p>
@@ -30,7 +33,9 @@ export const createTask = defineMethod(async (args: { name: string }) => {
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Client</h2>
+            <Heading level={2} className="mt-8">
+                Client
+            </Heading>
             <p>
                 <code>src/pages/tasks.tsx</code>
             </p>
@@ -61,7 +66,9 @@ export default function TasksPage() {
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Real-time web APP</h2>
+            <Heading level={2} className="mt-8">
+                Real-time web APP
+            </Heading>
             <div>
                 <p>
                     By changing the <code>useFetch</code> TTL setting to a low number ({"<"}2 seconds) you can convert your app into a real-time web app.

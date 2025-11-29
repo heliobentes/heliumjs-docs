@@ -1,14 +1,15 @@
 "use ssg";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function Navigation() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Navigation</h1>
+            <Heading level={1}>Navigation</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Link Component</h2>
+                <Heading level={2}>Link Component</Heading>
                 <p>
                     Use the <code>Link</code> component for client-side navigation:
                 </p>
@@ -27,7 +28,7 @@ export default function Nav() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Props</h3>
+                <Heading level={3}>Props</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>href</code> (string): Target URL
@@ -46,7 +47,7 @@ export default function Nav() {
                     </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-gray-900">Behavior</h3>
+                <Heading level={3}>Behavior</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Left-clicks are intercepted for SPA navigation</li>
                     <li>Modifier keys (Ctrl, Cmd, Shift, Alt) preserve normal link behavior (open in new tab, etc.)</li>
@@ -56,7 +57,7 @@ export default function Nav() {
                     </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-gray-900">Prefetching</h3>
+                <Heading level={3}>Prefetching</Heading>
                 <p>Links automatically prefetch page chunks on hover and focus (keyboard navigation). This means when a user clicks a link, the page is often already loaded:</p>
                 <CodeBlock
                     code={`// Prefetching enabled by default
@@ -72,7 +73,7 @@ export default function Nav() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Programmatic Navigation</h2>
+                <Heading level={2}>Programmatic Navigation</Heading>
                 <p>
                     Use the <code>useRouter</code> hook for programmatic navigation:
                 </p>
@@ -95,11 +96,11 @@ export default function LoginPage() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Navigation Methods</h3>
+                <Heading level={3}>Navigation Methods</Heading>
 
-                <h4 className="text-lg font-semibold text-gray-900">
+                <Heading level={4}>
                     <code>push(href: string)</code>
-                </h4>
+                </Heading>
                 <p>Navigate to a new route (adds to history):</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -110,9 +111,9 @@ router.push("/search?q=hello");`}
                     language="typescript"
                 />
 
-                <h4 className="text-lg font-semibold text-gray-900">
+                <Heading level={4}>
                     <code>replace(href: string)</code>
-                </h4>
+                </Heading>
                 <p>Navigate to a new route (replaces current history entry):</p>
                 <CodeBlock
                     code={`const router = useRouter();
@@ -131,7 +132,7 @@ router.replace("/login");`}
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Redirect Component</h2>
+                <Heading level={2}>Redirect Component</Heading>
                 <p>
                     For declarative redirects, use the <code>Redirect</code> component instead of calling <code>router.push()</code> during render:
                 </p>
@@ -144,7 +145,7 @@ export default function OldDocsPage() {
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Props</h3>
+                <Heading level={3}>Props</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>to</code> (string): Target URL
@@ -154,14 +155,14 @@ export default function OldDocsPage() {
                     </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-gray-900">Why use Redirect?</h3>
+                <Heading level={3}>Why use Redirect?</Heading>
                 <p>
                     Calling <code>router.push()</code> directly during render is an anti-pattern in React that can cause issues. The <code>Redirect</code> component uses{" "}
                     <code>useLayoutEffect</code> internally to ensure navigation happens after the component mounts but before paint, following React best practices and preventing
                     issues with server-side rendering.
                 </p>
 
-                <h3 className="text-xl font-semibold text-gray-900">Example Use Cases</h3>
+                <Heading level={3}>Example Use Cases</Heading>
                 <CodeBlock
                     code={`// Redirect index page to a default subpage
 // src/pages/docs/index.tsx
@@ -191,7 +192,7 @@ export default function ProtectedPage() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
                     <li>
                         <strong>Use Link for internal navigation</strong>: Enables SPA navigation, prefetching, and better performance

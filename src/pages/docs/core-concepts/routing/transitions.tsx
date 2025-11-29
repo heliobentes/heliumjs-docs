@@ -1,14 +1,15 @@
 "use ssg";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function PageTransitions() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Page Transitions</h1>
+            <Heading level={1}>Page Transitions</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Overview</h2>
+                <Heading level={2}>Overview</Heading>
                 <p>Helium provides built-in support for smooth page transitions using React 18+ concurrent features. This prevents UI freezing when navigating to heavy pages.</p>
 
                 <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
@@ -34,7 +35,7 @@ export default function PageTransitions() {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">PageTransition Component</h2>
+                <Heading level={2}>PageTransition Component</Heading>
                 <p>
                     The <code>PageTransition</code> component handles all navigation transition complexity with a simple API:
                 </p>
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     language="tsx"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Props</h3>
+                <Heading level={3}>Props</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>children</code> (ReactNode): Content to wrap
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-gray-900">With Tailwind CSS</h3>
+                <Heading level={3}>With Tailwind CSS</Heading>
                 <CodeBlock
                     code={`<PageTransition
     loadingClassName="opacity-60 transition-opacity duration-150"
@@ -85,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     language="tsx"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">With Inline Styles</h3>
+                <Heading level={3}>With Inline Styles</Heading>
                 <CodeBlock
                     code={`<PageTransition
     loadingStyle={{ opacity: 0.6, transition: 'opacity 150ms ease' }}
@@ -97,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">useDeferredNavigation Hook</h2>
+                <Heading level={2}>useDeferredNavigation Hook</Heading>
                 <p>
                     For more control, the <code>useDeferredNavigation</code> hook integrates <code>useDeferredValue</code> and <code>useTransition</code> with the router:
                 </p>
@@ -116,7 +117,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     language="tsx"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Returned Values</h3>
+                <Heading level={3}>Returned Values</Heading>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>
                         <code>path</code> (string): Current path being navigated to
@@ -137,7 +138,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Global Loading Indicator</h2>
+                <Heading level={2}>Global Loading Indicator</Heading>
                 <p>Create a top loading bar that shows during navigation:</p>
                 <CodeBlock
                     code={`// src/components/NavigationLoader.tsx
@@ -182,7 +183,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Using isPending for Visual Feedback</h2>
+                <Heading level={2}>Using isPending for Visual Feedback</Heading>
                 <p>
                     Use <code>router.isPending</code> to show visual feedback when content is stale:
                 </p>
@@ -206,7 +207,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Best Practices</h2>
+                <Heading level={2}>Best Practices</Heading>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
                     <li>
                         <strong>Use PageTransition in root layout</strong>: Wrap your main content area for consistent transitions

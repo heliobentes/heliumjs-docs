@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function SSG() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Static Site Generation (SSG)</h1>
+            <Heading level={1}>Static Site Generation (SSG)</Heading>
             <p>HeliumTS supports Static Site Generation (SSG) through pre-rendering pages at build time.</p>
             <p>
                 Add a <code>"use ssg";</code> directive at the top of your page component to enable SSG:

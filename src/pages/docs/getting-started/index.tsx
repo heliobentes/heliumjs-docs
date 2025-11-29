@@ -1,19 +1,25 @@
 "use ssg";
+import Heading from "../../../components/Heading";
+
 export default function Introduction() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Introduction</h1>
+            <Heading level={1}>Introduction</Heading>
             <p className="text-lg text-gray-700">HeliumTS is a blazing fast 🚀 and opinionated full-stack React + Vite framework designed for simplicity and type safety.</p>
 
             <div className="bg-teal-50 border border-teal-200 rounded-lg p-6 my-6">
-                <h3 className="text-lg font-semibold text-teal-900 mb-2">Check out the Example App</h3>
+                <Heading level={3} className="text-teal-900 mb-2">
+                    Check out the Example App
+                </Heading>
                 <p className="text-teal-800 mb-4">See HeliumTS in action with a fully functional example application including authentication, database integration, and more.</p>
                 <a href="https://github.com/heliobentes/heliumts-example-app" target="_blank" rel="noopener noreferrer" className="button primary">
                     View Example on GitHub &rarr;
                 </a>
             </div>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Why HeliumTS?</h2>
+            <Heading level={2} className="mt-8">
+                Why HeliumTS?
+            </Heading>
             <p>
                 Building full-stack applications often involves gluing together multiple tools and libraries. HeliumTS provides a cohesive experience by integrating the server and
                 client seamlessly.

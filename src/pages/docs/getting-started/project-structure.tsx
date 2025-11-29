@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function ProjectStructure() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Project Structure</h1>
+            <Heading level={1}>Project Structure</Heading>
             <p>A typical HeliumTS project looks like this:</p>
             <CodeBlock
                 code={`src/

@@ -1,10 +1,11 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function Middleware() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Middleware</h1>
+            <Heading level={1}>Middleware</Heading>
             <p>You can define a middleware to intercept requests to the server.</p>
 
             <p>

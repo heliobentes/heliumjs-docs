@@ -1,16 +1,19 @@
 "use ssg";
 import CodeBlock from "../../../components/CodeBlock";
+import Heading from "../../../components/Heading";
 
 export default function ContextAPI() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">Context API</h1>
+            <Heading level={1}>Context API</Heading>
             <p>
                 Every RPC method and HTTP handler in Helium receives a <code>HeliumContext</code> object as the second parameter. This context provides access to request metadata,
                 including the client IP, headers, and other connection information.
             </p>
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Context Structure</h2>
+            <Heading level={2} className="mt-8">
+                Context Structure
+            </Heading>
             <CodeBlock
                 code={`interface HeliumContext {
     req: {
@@ -25,7 +28,9 @@ export default function ContextAPI() {
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Usage in RPC Methods</h2>
+            <Heading level={2} className="mt-8">
+                Usage in RPC Methods
+            </Heading>
             <CodeBlock
                 code={`import { defineMethod } from "heliumts/server";
 
@@ -49,7 +54,9 @@ export const getClientInfo = defineMethod(async (args, ctx) => {
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Usage in HTTP Handlers</h2>
+            <Heading level={2} className="mt-8">
+                Usage in HTTP Handlers
+            </Heading>
             <CodeBlock
                 code={`import { defineHTTPRequest } from "heliumts/server";
 
@@ -70,7 +77,9 @@ export const apiEndpoint = defineHTTPRequest("POST", "/api/data", async (req, ct
                 language="typescript"
             />
 
-            <h2 className="text-2xl font-semibold text-gray-900 mt-8">Custom Context Properties</h2>
+            <Heading level={2} className="mt-8">
+                Custom Context Properties
+            </Heading>
             <p>Middleware can add custom properties to the context:</p>
             <CodeBlock
                 code={`import { middleware } from "heliumts/server";

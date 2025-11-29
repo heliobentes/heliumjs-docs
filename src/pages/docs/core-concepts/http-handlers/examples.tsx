@@ -1,14 +1,15 @@
 "use ssg";
 
 import CodeBlock from "../../../../components/CodeBlock";
+import Heading from "../../../../components/Heading";
 
 export default function HttpHandlerExamples() {
     return (
         <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">HTTP Handler Examples</h1>
+            <Heading level={1}>HTTP Handler Examples</Heading>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Stripe Webhook</h2>
+                <Heading level={2}>Stripe Webhook</Heading>
                 <p>Handle Stripe webhook events with signature verification:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -70,7 +71,7 @@ export const stripeWebhook = defineHTTPRequest("POST", "/webhooks/stripe", async
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">OpenAI Streaming</h2>
+                <Heading level={2}>OpenAI Streaming</Heading>
                 <p>Stream OpenAI chat completions to the client:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -140,7 +141,7 @@ export const chatCompletionStream = defineHTTPRequest("POST", "/api/chat/stream"
                     language="typescript"
                 />
 
-                <h3 className="text-xl font-semibold text-gray-900">Client-Side Consumption</h3>
+                <Heading level={3}>Client-Side Consumption</Heading>
                 <CodeBlock
                     code={`// React component consuming the stream
 async function streamChat(message: string) {
@@ -174,7 +175,7 @@ async function streamChat(message: string) {
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Authentication Handler (Better Auth)</h2>
+                <Heading level={2}>Authentication Handler (Better Auth)</Heading>
                 <p>Integrate with Better Auth or similar authentication libraries:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -209,7 +210,7 @@ export const authHandler = defineHTTPRequest("ALL", "/api/auth/*", async (req, c
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">GitHub Webhook</h2>
+                <Heading level={2}>GitHub Webhook</Heading>
                 <p>Handle GitHub webhook events:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -258,7 +259,7 @@ export const githubWebhook = defineHTTPRequest("POST", "/webhooks/github", async
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">File Upload</h2>
+                <Heading level={2}>File Upload</Heading>
                 <p>Handle file uploads with form data:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -318,7 +319,7 @@ export const uploadFile = defineHTTPRequest("POST", "/api/upload", async (req, c
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">REST API CRUD</h2>
+                <Heading level={2}>REST API CRUD</Heading>
                 <p>A complete REST API example:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -412,7 +413,7 @@ export const deleteTodo = defineHTTPRequest("DELETE", "/api/todos/:id", async (r
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Server-Sent Events (SSE)</h2>
+                <Heading level={2}>Server-Sent Events (SSE)</Heading>
                 <p>Real-time updates using SSE:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
@@ -474,7 +475,7 @@ export const createNotification = defineHTTPRequest("POST", "/api/notifications"
             </section>
 
             <section className="space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-900">Rate Limiting</h2>
+                <Heading level={2}>Rate Limiting</Heading>
                 <p>Simple rate limiting example:</p>
                 <CodeBlock
                     code={`import { defineHTTPRequest } from "heliumts/server";
