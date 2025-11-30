@@ -135,7 +135,7 @@ export default function SpeedTest() {
     };
 
     return (
-        <div className="py-10 max-w-4xl mx-auto">
+        <div className="py-10 px-4 max-w-4xl mx-auto">
             <h1 className="text-3xl font-semibold text-center mb-3">Speed Test</h1>
             <p className="text-lg text-gray-500 text-center mb-8">Compare the performance of Helium RPC vs HTTP requests.</p>
 

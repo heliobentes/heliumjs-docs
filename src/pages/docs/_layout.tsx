@@ -170,19 +170,24 @@ export default function DocsLayout({ children }: LayoutProps) {
 
     return (
         <div className="flex flex-col lg:flex-row gap-8 py-6 px-4">
-            <div className="lg:hidden mb-4">
-                <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                    {isMobileMenuOpen ? <IconX size={18} /> : <IconMenu2 size={18} />}
-                    {isMobileMenuOpen ? "Close Menu" : "Menu"}
-                </button>
+            <div className="lg:hidden mb-4 space-y-4">
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                    >
+                        {isMobileMenuOpen ? <IconX size={18} /> : <IconMenu2 size={18} />}
+                        {isMobileMenuOpen ? "Close Menu" : "Menu"}
+                    </button>
+                    <div className="flex-1">
+                        <Search />
+                    </div>
+                </div>
             </div>
 
             <aside className={cn("w-full lg:w-56 shrink-0", isMobileMenuOpen ? "block" : "hidden lg:block")}>
                 <div className="sticky top-24">
-                    <div className="mb-4 px-3 lg:px-0">
+                    <div className="mb-4 px-3 lg:px-0 hidden lg:block">
                         <Search />
                     </div>
                     <nav className="max-h-[calc(100vh-6rem)] overflow-y-auto space-y-2 pb-10 pr-1">

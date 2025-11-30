@@ -265,10 +265,12 @@ export function Search() {
         return (
             <button
                 onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-500 bg-gray-50 border border-gray-200 rounded-md hover:bg-gray-100 hover:text-gray-700 transition-colors w-full"
+                className="flex items-center gap-2 px-3 py-2 lg:py-1.5 text-sm text-gray-500 bg-gray-50 border border-gray-200 rounded-md hover:bg-gray-100 hover:text-gray-700 transition-colors w-full"
             >
                 <IconSearch size={16} />
-                <span>Search docs...</span>
+                <span>
+                    Search<span className="hidden sm:inline"> docs</span>...
+                </span>
                 <kbd className="ml-auto hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 text-xs font-medium text-gray-500 bg-white border border-gray-200 rounded">
                     <span className="text-xs">⌘</span>K
                 </kbd>
@@ -292,7 +294,7 @@ export function Search() {
                         }}
                         onKeyDown={handleKeyDown}
                         placeholder="Search documentation..."
-                        className="flex-1 border-0 bg-transparent px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:outline-none"
+                        className="flex-1 border-0 bg-transparent px-3 py-2 text-base md:text-sm text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:outline-none"
                     />
                     <button onClick={() => setIsOpen(false)} className="p-1 text-gray-400 hover:text-gray-500 rounded-md">
                         <IconX size={18} />
